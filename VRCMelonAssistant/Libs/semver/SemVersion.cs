@@ -43,7 +43,7 @@ namespace VRCMelonAssistant.Libs
 #endif
     {
         private static readonly Regex ParseEx =
-            new Regex(@"^(?<major>\d+)" +
+            new(@"^(?<major>\d+)" +
                 @"(?>\.(?<minor>\d+))?" +
                 @"(?>\.(?<patch>\d+))?" +
                 @"(?>\.(?<extra>\d+))?" +

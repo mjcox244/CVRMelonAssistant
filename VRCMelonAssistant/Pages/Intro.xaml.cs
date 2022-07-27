@@ -10,7 +10,7 @@ namespace VRCMelonAssistant.Pages
     /// </summary>
     public partial class Intro : Page
     {
-        public static Intro Instance = new Intro();
+        public static Intro Instance = new();
 
         public Intro()
         {

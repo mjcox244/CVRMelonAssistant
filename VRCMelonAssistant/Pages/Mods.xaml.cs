@@ -28,21 +28,21 @@ namespace VRCMelonAssistant.Pages
     /// </summary>
     public sealed partial class Mods : Page
     {
-        public static Mods Instance = new Mods();
+        public static Mods Instance = new();
 
         private static readonly ModListItem.CategoryInfo BrokenCategory = new("Broken", "These mods were broken by a game update. They will be temporarily removed and restored once they are updated for the current game version");
         private static readonly ModListItem.CategoryInfo RetiredCategory = new("Retired", "These mods are either no longer needed due to VRChat updates or are no longer being maintained");
         private static readonly ModListItem.CategoryInfo UncategorizedCategory = new("Uncategorized", "Mods without a category assigned");
         private static readonly ModListItem.CategoryInfo UnknownCategory = new("Unknown/Unverified", "Mods not coming from VRCMG. Potentially dangerous.");
 
-        public List<string> DefaultMods = new List<string>() { "UI Expansion Kit", "Finitizer", "VRCModUpdater.Loader", "VRChatUtilityKit", "Final IK Sanity", "ActionMenuApi" };
+        public List<string> DefaultMods = new() { "UI Expansion Kit", "Finitizer", "VRCModUpdater.Loader", "VRChatUtilityKit", "Final IK Sanity", "ActionMenuApi" };
         public Mod[] AllModsList;
-        public List<Mod> UnknownMods = new List<Mod>();
+        public List<Mod> UnknownMods = new();
         public CollectionView view;
         public bool PendingChanges;
         public bool HaveInstalledMods;
 
-        private readonly SemaphoreSlim _modsLoadSem = new SemaphoreSlim(1, 1);
+        private readonly SemaphoreSlim _modsLoadSem = new(1, 1);
 
         public List<ModListItem> ModList { get; set; }
 
@@ -110,12 +110,12 @@ namespace VRCMelonAssistant.Pages
                 DescriptionColumn.Width = 750;
 
                 MainWindow.Instance.MainText = $"{FindResource("Mods:LoadingMods")}...";
-                await PopulateModsList();
+                PopulateModsList();
 
                 ModsListView.ItemsSource = ModList;
 
                 view = (CollectionView)CollectionViewSource.GetDefaultView(ModsListView.ItemsSource);
-                PropertyGroupDescription groupDescription = new PropertyGroupDescription("Category");
+                PropertyGroupDescription groupDescription = new("Category");
                 view.GroupDescriptions.Add(groupDescription);
 
                 this.DataContext = this;
@@ -236,7 +236,7 @@ namespace VRCMelonAssistant.Pages
                         return ((string) attr.ConstructorArguments[1].Value,
                             (string) attr.ConstructorArguments[2].Value, (string) attr.ConstructorArguments[3].Value);
             }
-            catch (Exception ex)
+            catch
             {
                 var result = MessageBox.Show(
                     $"A mod in {Path.GetFileName(dllPath)} is invalid. Would you like to delete it to avoid this error in the future?",
@@ -258,7 +258,7 @@ namespace VRCMelonAssistant.Pages
             return (null, null, null);
         }
 
-        public async Task PopulateModsList()
+        public void PopulateModsList()
         {
             foreach (Mod mod in AllModsList.Where(x => !x.versions[0].IsBroken && !x.versions[0].IsRetired))
                 AddModToList(mod);
@@ -291,7 +291,7 @@ namespace VRCMelonAssistant.Pages
                     HardcodedCategories.GetCategoryDescription(mod.category));
             }
 
-            ModListItem ListItem = new ModListItem()
+            ModListItem ListItem = new()
             {
                 IsSelected = preSelected,
                 IsEnabled = true,
@@ -360,7 +360,7 @@ namespace VRCMelonAssistant.Pages
         public class Category
         {
             public string CategoryName { get; set; }
-            public List<ModListItem> Mods = new List<ModListItem>();
+            public List<ModListItem> Mods = new();
         }
 
         public class ModListItem
@@ -555,14 +555,14 @@ namespace VRCMelonAssistant.Pages
         private void Animate(TextBlock target, double oldHeight, double newHeight, TimeSpan duration)
         {
             target.Height = oldHeight;
-            DoubleAnimation animation = new DoubleAnimation(newHeight, duration);
+            DoubleAnimation animation = new(newHeight, duration);
             target.BeginAnimation(HeightProperty, animation);
         }
 
         private void Animate(TextBox target, double oldHeight, double newHeight, TimeSpan duration)
         {
             target.Height = oldHeight;
-            DoubleAnimation animation = new DoubleAnimation(newHeight, duration);
+            DoubleAnimation animation = new(newHeight, duration);
             target.BeginAnimation(HeightProperty, animation);
         }
 

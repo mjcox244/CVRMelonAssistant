@@ -13,7 +13,7 @@ namespace VRCMelonAssistant.Pages
     /// </summary>
     public partial class About : Page
     {
-        public static About Instance = new About();
+        public static About Instance = new();
 
         public About()
         {

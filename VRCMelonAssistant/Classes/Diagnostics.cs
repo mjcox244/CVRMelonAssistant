@@ -8,7 +8,7 @@ namespace VRCMelonAssistant
     {
         public static string[] ReadFolder(string path, int level = 0)
         {
-            List<string> entries = new List<string>();
+            List<string> entries = new();
 
             foreach (string file in Directory.GetFileSystemEntries(path))
             {
