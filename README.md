@@ -4,7 +4,8 @@ CVR Melon Assistant is a PC mod installer for ChilloutVR. It uses mods published
 It's a Double fork, [VRC MelonAssistent](https://github.com/knah/VRCMelonAssistant) being our direct upline 
 
 **Unlike VRChat, Chillout is happy with users createing non malicious mods that do not harm the experience of others. (no ban risk here)
-CVR Melon Assistant is not affiliated with and/or endorsed by Alpha Blend Interactive.
+ 
+**CVR Melon Assistant is not affiliated with and/or endorsed by Alpha Blend Interactive.
 
 * [Features](#Features)
 * [Usage](#Usage)
