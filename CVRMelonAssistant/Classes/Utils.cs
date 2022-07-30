@@ -191,12 +191,12 @@ namespace CVRMelonAssistant
                 }
             }
 
-            var regex = new Regex("\\s\"installdir\"\\s+\"(.+)\"");
+            regex = new Regex("\\s\"installdir\"\\s+\"(.+)\"");
             foreach (string path in SteamPaths)
             {
                 if (File.Exists(Path.Combine(@path, @"appmanifest_" + Constants.ChilloutVRAppId + ".acf")))
                 {
-                    using (StreamReader reader = new(Path.Combine(@path, @"appmanifest_" + Constants.VRChatAppId + ".acf")))
+                    using (StreamReader reader = new(Path.Combine(@path, @"appmanifest_" + Constants.ChilloutVRAppId + ".acf")))
                     {
                         string line;
                         while ((line = reader.ReadLine()) != null)
@@ -218,7 +218,7 @@ namespace CVRMelonAssistant
 
         public static string GetVersion()
         {
-            string filename = Path.Combine(App.VRChatInstallDirectory, "VRChat_Data", "globalgamemanagers");
+            string filename = Path.Combine(App.ChilloutInstallDirectory, "VRChat_Data", "globalgamemanagers");
             using (FileStream fs = new(filename, FileMode.Open, FileAccess.Read))
             {
                 byte[] file = File.ReadAllBytes(filename);
