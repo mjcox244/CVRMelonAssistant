@@ -236,7 +236,7 @@ namespace CVRMelonAssistant.Pages
                         return ((string) attr.ConstructorArguments[1].Value,
                             (string) attr.ConstructorArguments[2].Value, (string) attr.ConstructorArguments[3].Value);
             }
-            catch (Exception ex)
+            catch
             {
                 var result = MessageBox.Show(
                     $"A mod in {Path.GetFileName(dllPath)} is invalid. Would you like to delete it to avoid this error in the future?",
@@ -258,7 +258,7 @@ namespace CVRMelonAssistant.Pages
             return (null, null, null);
         }
 
-        public async Task PopulateModsList()
+        public Task PopulateModsList()
         {
             foreach (Mod mod in AllModsList.Where(x => !x.versions[0].IsBroken && !x.versions[0].IsRetired))
                 AddModToList(mod);
@@ -271,6 +271,7 @@ namespace CVRMelonAssistant.Pages
 
             foreach (Mod mod in AllModsList.Where(x => x.versions[0].IsRetired))
                 AddModToList(mod);
+            return Task.CompletedTask;
         }
 
         private void AddModToList(Mod mod, ModListItem.CategoryInfo categoryOverride = null)

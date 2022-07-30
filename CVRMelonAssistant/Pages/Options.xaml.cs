@@ -78,7 +78,7 @@ namespace CVRMelonAssistant.Pages
             }
         }
 
-        private async void YeetModsButton_Click(object sender, RoutedEventArgs e)
+        private void YeetModsButton_Click(object sender, RoutedEventArgs e)
         {
             string title = (string)Application.Current.FindResource("Options:YeetModsBox:Title");
             string line1 = (string)Application.Current.FindResource("Options:YeetModsBox:RemoveAllMods");
@@ -101,7 +101,7 @@ namespace CVRMelonAssistant.Pages
             }
         }
 
-        private async void YeetMelonLoaderButton_Click(object sender, RoutedEventArgs e)
+        private void YeetMelonLoaderButton_Click(object sender, RoutedEventArgs e)
         {
             string title = (string)Application.Current.FindResource("Options:YeetMLBox:Title");
             string line1 = (string)Application.Current.FindResource("Options:YeetMLBox:RemoveAllMods");
