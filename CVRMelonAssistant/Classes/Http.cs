@@ -32,7 +32,7 @@ namespace CVRMelonAssistant
             }
         }
 
-        public static JavaScriptSerializer JsonSerializer = new JavaScriptSerializer()
+        public static JavaScriptSerializer JsonSerializer = new()
         {
             MaxJsonLength = int.MaxValue,
         };

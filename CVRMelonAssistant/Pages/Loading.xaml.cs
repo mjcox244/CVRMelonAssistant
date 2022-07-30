@@ -9,7 +9,7 @@ namespace CVRMelonAssistant.Pages
     /// </summary>
     public partial class Loading : Page
     {
-        public static Loading Instance = new Loading();
+        public static Loading Instance = new();
 
         public Loading()
         {

@@ -10,7 +10,7 @@ namespace CVRMelonAssistant.Pages
     /// </summary>
     public partial class Invalid : Page
     {
-        public static Invalid Instance = new Invalid();
+        public static Invalid Instance = new();
         public string InstallDirectory { get; set; }
 
         public Invalid()

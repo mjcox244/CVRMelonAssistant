@@ -28,21 +28,21 @@ namespace CVRMelonAssistant.Pages
     /// </summary>
     public sealed partial class Mods : Page
     {
-        public static Mods Instance = new Mods();
+        public static Mods Instance = new();
 
         private static readonly ModListItem.CategoryInfo BrokenCategory = new("Broken", "These mods were broken by a game update. They will be temporarily removed and restored once they are updated for the current game version");
         private static readonly ModListItem.CategoryInfo RetiredCategory = new("Retired", "These mods are either no longer needed due to ChilloutVR updates or are no longer being maintained");
         private static readonly ModListItem.CategoryInfo UncategorizedCategory = new("Uncategorized", "Mods without a category assigned");
         private static readonly ModListItem.CategoryInfo UnknownCategory = new("Unknown/Unverified", "Mods not coming from CVRMG. Potentially dangerous.");
 
-        public List<string> DefaultMods = new List<string>() { "UI Expansion Kit", "CVRModUpdater.Loader" };
+        public List<string> DefaultMods = new() { "UI Expansion Kit", "Finitizer", "VRCModUpdater.Loader", "VRChatUtilityKit", "Final IK Sanity", "ActionMenuApi" };
         public Mod[] AllModsList;
-        public List<Mod> UnknownMods = new List<Mod>();
+        public List<Mod> UnknownMods = new();
         public CollectionView view;
         public bool PendingChanges;
         public bool HaveInstalledMods;
 
-        private readonly SemaphoreSlim _modsLoadSem = new SemaphoreSlim(1, 1);
+        private readonly SemaphoreSlim _modsLoadSem = new(1, 1);
 
         public List<ModListItem> ModList { get; set; }
 
@@ -110,12 +110,12 @@ namespace CVRMelonAssistant.Pages
                 DescriptionColumn.Width = 750;
 
                 MainWindow.Instance.MainText = $"{FindResource("Mods:LoadingMods")}...";
-                await PopulateModsList();
+                PopulateModsList();
 
                 ModsListView.ItemsSource = ModList;
 
                 view = (CollectionView)CollectionViewSource.GetDefaultView(ModsListView.ItemsSource);
-                PropertyGroupDescription groupDescription = new PropertyGroupDescription("Category");
+                PropertyGroupDescription groupDescription = new("Category");
                 view.GroupDescriptions.Add(groupDescription);
 
                 this.DataContext = this;
@@ -258,7 +258,7 @@ namespace CVRMelonAssistant.Pages
             return (null, null, null);
         }
 
-        public Task PopulateModsList()
+        public void PopulateModsList()
         {
             foreach (Mod mod in AllModsList.Where(x => !x.versions[0].IsBroken && !x.versions[0].IsRetired))
                 AddModToList(mod);
@@ -292,7 +292,7 @@ namespace CVRMelonAssistant.Pages
                     HardcodedCategories.GetCategoryDescription(mod.category));
             }
 
-            ModListItem ListItem = new ModListItem()
+            ModListItem ListItem = new()
             {
                 IsSelected = preSelected,
                 IsEnabled = true,
@@ -361,7 +361,7 @@ namespace CVRMelonAssistant.Pages
         public class Category
         {
             public string CategoryName { get; set; }
-            public List<ModListItem> Mods = new List<ModListItem>();
+            public List<ModListItem> Mods = new();
         }
 
         public class ModListItem
@@ -556,14 +556,14 @@ namespace CVRMelonAssistant.Pages
         private void Animate(TextBlock target, double oldHeight, double newHeight, TimeSpan duration)
         {
             target.Height = oldHeight;
-            DoubleAnimation animation = new DoubleAnimation(newHeight, duration);
+            DoubleAnimation animation = new(newHeight, duration);
             target.BeginAnimation(HeightProperty, animation);
         }
 
         private void Animate(TextBox target, double oldHeight, double newHeight, TimeSpan duration)
         {
             target.Height = oldHeight;
-            DoubleAnimation animation = new DoubleAnimation(newHeight, duration);
+            DoubleAnimation animation = new(newHeight, duration);
             target.BeginAnimation(HeightProperty, animation);
         }
 

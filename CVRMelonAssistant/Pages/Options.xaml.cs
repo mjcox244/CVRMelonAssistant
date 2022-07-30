@@ -17,7 +17,7 @@ namespace CVRMelonAssistant.Pages
     /// </summary>
     public partial class Options : Page
     {
-        public static Options Instance = new Options();
+        public static Options Instance = new();
 
         public string InstallDirectory { get; set; }
         public string InstallType { get; set; }

@@ -1,9 +1,11 @@
-# [Download here!](https://github.com/knah/CVRMelonAssistant/releases/latest)
+# [Download here!](https://github.com/mjcox244/CVRMelonAssistant/releases/latest)
 
-ChilloutVR Melon Assistant is a PC mod installer for ChilloutVR. It uses mods published in [ChilloutVR Modding Group Discord](https://discord.gg/xE7AwSrn).  
-It's a (very stripped down) fork of [Assistant's Mod Assistant](https://github.com/Assistant/ModAssistant), a mod manager for Beat Saber.  
-Modding ChilloutVR is allowed by the developers. You can read relevant [TOS portion here](https://docs.abinteractive.net/official/legal/tos/#7-modding-our-games).
-ChilloutVR Melon Assistant is not affiliated with and/or endorsed by Alpha Blend Interactive.
+CVR Melon Assistant is a PC mod installer for ChilloutVR. It uses mods published in [CVR Modding discord](https://discord.gg/6mGW6yvAkZ).  
+It's a Double fork, [VRC MelonAssistent](https://github.com/knah/VRCMelonAssistant) being our direct upline 
+
+**Unlike VRChat, Chillout is happy with users createing non malicious mods that do not harm the experience of others. (no ban risk here)
+ 
+**CVR Melon Assistant is not affiliated with and/or endorsed by Alpha Blend Interactive.
 
 * [Features](#Features)
 * [Usage](#Usage)
@@ -12,7 +14,7 @@ ChilloutVR Melon Assistant is not affiliated with and/or endorsed by Alpha Blend
 
 ## Features
 
-ChilloutVR Melon Assistant boasts a rich feature set, some of which include:
+CVR has the same feature set as VRC Melon, some of which include:
 * Installed mod detection
 * Mod uninstallation
 * Broken mod move-aside (temporarily uninstalls them until a fix is available)
@@ -25,7 +27,7 @@ Then, simply check off the mods that you wish to install or update and click the
 
 
 ## Themes
-ChilloutVR Melon Assistant should support themes for Mod Assistant. Check [its README](https://github.com/Assistant/ModAssistant#themes) for more info on theming.  
+CVR Melon Assistant should support themes for Mod Assistant. Check [its README](https://github.com/Assistant/ModAssistant#themes) for more info on theming.  
 However, this is not a supported feature. If something doesn't work, don't complain to either Assistant or knah.
 
 ## Common Issues

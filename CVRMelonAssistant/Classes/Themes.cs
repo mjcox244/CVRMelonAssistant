@@ -22,15 +22,15 @@ namespace CVRMelonAssistant
         /// <summary>
         /// Local dictionary of Resource Dictionaries mapped by their names.
         /// </summary>
-        private static readonly Dictionary<string, Theme> loadedThemes = new Dictionary<string, Theme>();
-        private static readonly List<string> preInstalledThemes = new List<string> { "Light", "Dark", "Light Pink" };
+        private static readonly Dictionary<string, Theme> loadedThemes = new();
+        private static readonly List<string> preInstalledThemes = new() { "Light", "Dark", "Light Pink" };
 
         /// <summary>
         /// Index of "LoadedTheme" in App.xaml
         /// </summary>
         private static readonly int LOADED_THEME_INDEX = 3;
 
-        private static readonly List<string> supportedVideoExtensions = new List<string>() { ".mp4", ".webm", ".mkv", ".avi", ".m2ts" };
+        private static readonly List<string> supportedVideoExtensions = new() { ".mp4", ".webm", ".mkv", ".avi", ".m2ts" };
 
         /// <summary>
         /// Load all themes from local Themes subfolder and from embedded resources.
@@ -47,9 +47,9 @@ namespace CVRMelonAssistant
             foreach (string localTheme in preInstalledThemes)
             {
                 string location = $"Themes/{localTheme}.xaml";
-                Uri local = new Uri(location, UriKind.Relative);
+                Uri local = new(location, UriKind.Relative);
 
-                ResourceDictionary localDictionary = new ResourceDictionary
+                ResourceDictionary localDictionary = new()
                 {
                     Source = local
                 };
@@ -59,13 +59,13 @@ namespace CVRMelonAssistant
                  * The format must be: Background.png and Sidebar.png as a subfolder with the same name as the theme name.
                  * For example: "Themes/Dark/Background.png", or "Themes/Ugly Kulu-Ya-Ku/Sidebar.png"
                  */
-                Waifus waifus = new Waifus
+                Waifus waifus = new()
                 {
                     Background = GetImageFromEmbeddedResources(localTheme, "Background"),
                     Sidebar = GetImageFromEmbeddedResources(localTheme, "Sidebar")
                 };
 
-                Theme theme = new Theme(localTheme, localDictionary)
+                Theme theme = new(localTheme, localDictionary)
                 {
                     Waifus = waifus
                 };
@@ -78,7 +78,7 @@ namespace CVRMelonAssistant
             {
                 foreach (string file in Directory.EnumerateFiles(ThemeDirectory))
                 {
-                    FileInfo info = new FileInfo(file);
+                    FileInfo info = new(file);
                     string name = Path.GetFileNameWithoutExtension(info.Name);
 
                     if (info.Extension.ToLower().Equals(".mat"))
@@ -171,7 +171,7 @@ namespace CVRMelonAssistant
 
                 if (File.Exists(newTheme.VideoLocation))
                 {
-                    Uri videoUri = new Uri(newTheme.VideoLocation, UriKind.Absolute);
+                    Uri videoUri = new(newTheme.VideoLocation, UriKind.Absolute);
                     MainWindow.Instance.BackgroundVideo.Visibility = Visibility.Visible;
 
                     // Load the source video if it's not the same as what's playing, or if the theme is loading for the first time.
@@ -209,8 +209,8 @@ namespace CVRMelonAssistant
                  * Writing it as is instead of using XAMLWriter keeps the source as is with comments, spacing, and organization.
                  * Using XAMLWriter would compress it into an unorganized mess.
                  */
-                using (Stream s = Assembly.GetExecutingAssembly().GetManifestResourceStream($"CVRMelonAssistant.Themes.{themeName}.xaml"))
-                using (FileStream writer = new FileStream($@"{ThemeDirectory}\\{themeName}\\{themeName}.xaml", FileMode.Create))
+                using (Stream s = Assembly.GetExecutingAssembly().GetManifestResourceStream($"VRCMelonAssistant.Themes.{themeName}.xaml"))
+                using (FileStream writer = new($@"{ThemeDirectory}\\{themeName}\\{themeName}.xaml", FileMode.Create))
                 {
                     byte[] buffer = new byte[s.Length];
                     int read = s.Read(buffer, 0, (int)s.Length);
@@ -257,14 +257,14 @@ namespace CVRMelonAssistant
         /// <returns></returns>
         private static Theme LoadTheme(string directory, string name)
         {
-            Theme theme = new Theme(name, null)
+            Theme theme = new(name, null)
             {
                 Waifus = new Waifus()
             };
 
             foreach (string file in Directory.EnumerateFiles(directory).OrderBy(x => x))
             {
-                FileInfo info = new FileInfo(file);
+                FileInfo info = new(file);
                 bool isPng = info.Name.EndsWith(".png", StringComparison.OrdinalIgnoreCase);
                 bool isSidePng = info.Name.EndsWith(".side.png", StringComparison.OrdinalIgnoreCase);
                 bool isXaml = info.Name.EndsWith(".xaml", StringComparison.OrdinalIgnoreCase);
@@ -283,8 +283,8 @@ namespace CVRMelonAssistant
                 {
                     try
                     {
-                        Uri resourceSource = new Uri(info.FullName);
-                        ResourceDictionary dictionary = new ResourceDictionary
+                        Uri resourceSource = new(info.FullName);
+                        ResourceDictionary dictionary = new()
                         {
                             Source = resourceSource
                         };
@@ -355,11 +355,11 @@ namespace CVRMelonAssistant
         /// <param name="extension">Theme extension</param>
         private static Theme LoadZipTheme(string directory, string name, string extension)
         {
-            Waifus waifus = new Waifus();
+            Waifus waifus = new();
             ResourceDictionary dictionary = null;
 
-            using (FileStream stream = new FileStream(Path.Combine(directory, name + extension), FileMode.Open, FileAccess.Read))
-            using (ZipArchive archive = new ZipArchive(stream))
+            using (FileStream stream = new(Path.Combine(directory, name + extension), FileMode.Open, FileAccess.Read))
+            using (ZipArchive archive = new(stream))
             {
                 foreach (ZipArchiveEntry file in archive.Entries)
                 {
@@ -394,7 +394,7 @@ namespace CVRMelonAssistant
                              * The reason we are also checking LoadedTheme against the name variable is to prevent overwriting a file that's
                              * already being used by CVRMelonAssistant and causing a System.IO.IOException.
                              */
-                            FileInfo existingInfo = new FileInfo(videoName);
+                            FileInfo existingInfo = new(videoName);
                             if (existingInfo.Length != file.Length && LoadedTheme != name)
                             {
                                 file.ExtractToFile(videoName, true);
@@ -417,7 +417,7 @@ namespace CVRMelonAssistant
                 }
             }
 
-            Theme theme = new Theme(name, dictionary)
+            Theme theme = new(name, dictionary)
             {
                 Waifus = waifus
             };
@@ -434,7 +434,7 @@ namespace CVRMelonAssistant
         {
             using (var mStream = new MemoryStream(array))
             {
-                BitmapImage image = new BitmapImage();
+                BitmapImage image = new();
                 image.BeginInit();
                 image.CacheOption = BitmapCacheOption.OnLoad;
                 image.StreamSource = mStream;

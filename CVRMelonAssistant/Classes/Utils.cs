@@ -64,7 +64,7 @@ namespace CVRMelonAssistant
 
         public static void StartAsAdmin(string Arguments, bool Close = false)
         {
-            using (Process process = new Process())
+            using (Process process = new())
             {
                 process.StartInfo.FileName = Process.GetCurrentProcess().MainModule.FileName;
                 process.StartInfo.Arguments = Arguments;
@@ -171,13 +171,13 @@ namespace CVRMelonAssistant
             string vdf = Path.Combine(SteamInstall, @"steamapps\libraryfolders.vdf");
             if (!File.Exists(@vdf)) return null;
 
-
-            List<string> SteamPaths = new List<string>
+            Regex regex = new("\\s\"\\d\"\\s+\"(.+)\"");
+            List<string> SteamPaths = new()
             {
                 Path.Combine(SteamInstall, @"steamapps")
             };
 
-            using (StreamReader reader = new StreamReader(@vdf))
+            using (StreamReader reader = new(@vdf))
             {
                 var libFolderRegex = new Regex("\"path\"\\s+\"([^\"]+)\"");
                 string line;
@@ -196,7 +196,7 @@ namespace CVRMelonAssistant
             {
                 if (File.Exists(Path.Combine(@path, @"appmanifest_" + Constants.ChilloutVRAppId + ".acf")))
                 {
-                    using (StreamReader reader = new StreamReader(Path.Combine(@path, @"appmanifest_" + Constants.ChilloutVRAppId + ".acf")))
+                    using (StreamReader reader = new(Path.Combine(@path, @"appmanifest_" + Constants.VRChatAppId + ".acf")))
                     {
                         string line;
                         while ((line = reader.ReadLine()) != null)
@@ -218,8 +218,8 @@ namespace CVRMelonAssistant
 
         public static string GetVersion()
         {
-            string filename = Path.Combine(App.ChilloutInstallDirectory, "ChilloutVR_Data", "globalgamemanagers");
-            using (FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read))
+            string filename = Path.Combine(App.VRChatInstallDirectory, "VRChat_Data", "globalgamemanagers");
+            using (FileStream fs = new(filename, FileMode.Open, FileAccess.Read))
             {
                 byte[] file = File.ReadAllBytes(filename);
                 byte[] bytes = new byte[32];
@@ -252,10 +252,10 @@ namespace CVRMelonAssistant
             using (RegistryKey librariesKey = Registry.CurrentUser.OpenSubKey("Software")?.OpenSubKey("Oculus VR, LLC")?.OpenSubKey("Oculus")?.OpenSubKey("Libraries"))
             {
                 // Oculus libraries uses GUID volume paths like this "\\?\Volume{0fea75bf-8ad6-457c-9c24-cbe2396f1096}\Games\Oculus Apps", we need to transform these to "D:\Game"\Oculus Apps"
-                WqlObjectQuery wqlQuery = new WqlObjectQuery("SELECT * FROM Win32_Volume");
-                using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(wqlQuery))
+                WqlObjectQuery wqlQuery = new("SELECT * FROM Win32_Volume");
+                using (ManagementObjectSearcher searcher = new(wqlQuery))
                 {
-                    Dictionary<string, string> guidLetterVolumes = new Dictionary<string, string>();
+                    Dictionary<string, string> guidLetterVolumes = new();
 
                     foreach (ManagementBaseObject disk in searcher.Get())
                     {
@@ -343,7 +343,7 @@ namespace CVRMelonAssistant
         public static byte[] StreamToArray(Stream input)
         {
             byte[] buffer = new byte[16 * 1024];
-            using (MemoryStream ms = new MemoryStream())
+            using (MemoryStream ms = new())
             {
                 int read;
                 while ((read = input.Read(buffer, 0, buffer.Length)) > 0)
@@ -400,13 +400,13 @@ namespace CVRMelonAssistant
 
         public static void ShowMessageBoxAsync(string Message, string Caption)
         {
-            ShowMessageBoxDelegate caller = new ShowMessageBoxDelegate(ShowMessageBox);
+            ShowMessageBoxDelegate caller = new(ShowMessageBox);
             caller.BeginInvoke(Message, Caption, null, null);
         }
 
         public static void ShowMessageBoxAsync(string Message)
         {
-            ShowMessageBoxDelegate caller = new ShowMessageBoxDelegate(ShowMessageBox);
+            ShowMessageBoxDelegate caller = new(ShowMessageBox);
             caller.BeginInvoke(Message, null, null, null);
         }
 
