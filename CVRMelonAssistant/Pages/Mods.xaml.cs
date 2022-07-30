@@ -271,7 +271,6 @@ namespace CVRMelonAssistant.Pages
 
             foreach (Mod mod in AllModsList.Where(x => x.versions[0].IsRetired))
                 AddModToList(mod);
-            return Task.CompletedTask;
         }
 
         private void AddModToList(Mod mod, ModListItem.CategoryInfo categoryOverride = null)
