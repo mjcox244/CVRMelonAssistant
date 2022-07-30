@@ -37,10 +37,11 @@ However, this is not a supported feature. If something doesn't work, don't compl
   Additionally, make sure the proper ChilloutVR installation directory is selected in option tab.
   
 **I don't see a certain mod in the mods list!**
-  VRChat Melon Assistant uses mods from VRChat Modding Group and shows whatever is available for download. It's recommended to avoid non-VRCMG mods due to rampant spread of malware disguised as mods.
+  ChilloutVR Melon Assistant uses mods from ChilloutVR Modding Group and shows whatever is available for download.  
+  You can ask mod author to submit their mod for review to be included in the list. 
   
 **I hit install but now my game won't launch, I can't click any buttons, I only see a black screen, etc**
-  Please visit the [VRChat Modding Group](https://discord.gg/rCqKSvR) `#help-and-support` channel. Check the pinned messages or ask for help and see if you can work out things out.
+  Please visit the [ChilloutVR Modding Group](https://discord.gg/xE7AwSrn) `#help-and-support` channel. Check the pinned messages or ask for help and see if you can work out things out.
   
 ## Credits
 Lemon icon from Twitter Emoji
